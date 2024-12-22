@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { ClipLoader } from 'react-spinners';
-import { FaSearch } from 'react-icons/fa'; // Search icon
+import { FaSearch, FaBolt, FaPaintBrush, FaDownload } from 'react-icons/fa'; // Icons for Features and About
 import { motion } from 'framer-motion'; // Import Framer Motion
 
 export default function Home() {
@@ -129,10 +129,20 @@ export default function Home() {
       >
         <div className="max-w-7xl mx-auto text-center px-4">
           <h2 className="text-3xl font-bold mb-4">About</h2>
-          <p className="text-lg">
-            Our AI-powered image generator can create stunning images based on any text prompt you provide.
-            Explore the power of artificial intelligence and see what it can create for you!
-          </p>
+          <div className="flex flex-col md:flex-row justify-center items-center space-y-6 md:space-y-0 md:space-x-12">
+            <div className="flex flex-col items-center">
+              <FaBolt className="text-4xl text-yellow-400 mb-4" />
+              <p className="text-lg">Quick & Easy</p>
+            </div>
+            <div className="flex flex-col items-center">
+              <FaPaintBrush className="text-4xl text-pink-400 mb-4" />
+              <p className="text-lg">Creative Potential</p>
+            </div>
+            <div className="flex flex-col items-center">
+              <FaDownload className="text-4xl text-green-400 mb-4" />
+              <p className="text-lg">High-Quality Output</p>
+            </div>
+          </div>
         </div>
       </motion.section>
 
@@ -144,19 +154,28 @@ export default function Home() {
         transition={{ duration: 1 }}
       >
         <div className="max-w-7xl mx-auto text-center px-4">
-          <h2 className="text-3xl font-bold mb-4">Features</h2>
+          <h2 className="text-3xl font-bold mb-8">Features</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="p-6 bg-white shadow-md rounded-lg">
+              <div className="text-blue-600 text-4xl mb-4">
+                <FaBolt />
+              </div>
               <h3 className="text-xl font-semibold mb-2">Fast Generation</h3>
-              <p>Create images in a matter of seconds, using the latest AI technology.</p>
+              <p>Create images in a matter of seconds, powered by AI.</p>
             </div>
             <div className="p-6 bg-white shadow-md rounded-lg">
+              <div className="text-pink-500 text-4xl mb-4">
+                <FaPaintBrush />
+              </div>
               <h3 className="text-xl font-semibold mb-2">Unlimited Creativity</h3>
               <p>Provide any prompt, and watch AI bring it to life with unique creations.</p>
             </div>
             <div className="p-6 bg-white shadow-md rounded-lg">
+              <div className="text-green-500 text-4xl mb-4">
+                <FaDownload />
+              </div>
               <h3 className="text-xl font-semibold mb-2">High-Quality Results</h3>
-              <p>Our AI generates high-resolution images that you can download and use.</p>
+              <p>Our AI generates high-resolution images you can download and use.</p>
             </div>
           </div>
         </div>
