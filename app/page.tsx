@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { ClipLoader } from 'react-spinners';
 import { FaSearch, FaBolt, FaPaintBrush, FaDownload } from 'react-icons/fa'; // Icons for Features and About
 import { motion } from 'framer-motion'; // Import Framer Motion
+import Fancybox from 'react-fancybox';
+import 'react-fancybox/lib/fancybox.css'; // Import Fancybox styles
 
 export default function Home() {
   const [prompt, setPrompt] = useState('');
@@ -110,11 +112,29 @@ export default function Home() {
               transition={{ duration: 0.6 }}
             >
               <h2 className="text-2xl font-semibold text-gray-700">Generated Image:</h2>
-              <img
-                src={imageUrl}
-                alt="Generated AI"
-                className="max-w-full max-h-96 mt-4 rounded-lg shadow-lg"
-              />
+
+              {/* Fancybox Image Viewer */}
+              <Fancybox options={{ infinite: false }}>
+                <a href={imageUrl} data-fancybox="gallery">
+                  <img
+                    src={imageUrl}
+                    alt="Generated AI"
+                    className="max-w-full max-h-96 mt-4 rounded-lg shadow-lg cursor-pointer"
+                  />
+                </a>
+              </Fancybox>
+
+              {/* Download Button */}
+              <div className="mt-4">
+                <a
+                  href={imageUrl}
+                  download="generated-image.png"
+                  className="py-2 px-6 bg-green-500 text-white rounded-lg hover:bg-green-600 transition duration-300"
+                >
+                  <FaDownload className="inline-block mr-2" size={20} />
+                  Download Image
+                </a>
+              </div>
             </motion.div>
           )}
         </div>
