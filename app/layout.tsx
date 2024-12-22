@@ -25,10 +25,10 @@ export const metadata: Metadata = {
   openGraph: {
     title: "AI Image Generator | Stability AI",
     description: "Create stunning images from text prompts with Stability AI's powerful diffusion model.",
-    url: "https://yourwebsite.com",
+    url: "https://diffusion-ai.vercel.app",
     images: [
       {
-        url: "/c777875d-a605-438f-a308-061befa92da0.webp", // Corrected to 'images' and used the URL
+        url: "https://diffusion-ai.vercel.app/c777875d-a605-438f-a308-061befa92da0.webp", // Corrected to 'images' and used the URL
       },
     ],
   },
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     description: "Generate images from text prompts with Stability AI's diffusion model.",
     images: [
       {
-        url: "/c777875d-a605-438f-a308-061befa92da0.webp", // Corrected to 'images' and used the URL
+        url: "https://diffusion-ai.vercel.app/c777875d-a605-438f-a308-061befa92da0.webp", // Corrected to 'images' and used the URL
       },
     ],
   },
