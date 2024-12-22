@@ -1,101 +1,93 @@
-import Image from "next/image";
+'use client';
+
+import { useState } from 'react';
+import { ClipLoader } from 'react-spinners';
+import { FaSearch } from 'react-icons/fa'; // Search icon
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [prompt, setPrompt] = useState('');
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+  const generateImage = async () => {
+    if (!prompt) {
+      alert('Please enter a prompt');
+      return;
+    }
+
+    setLoading(true);
+    setError(null);
+    setImageUrl(null);
+
+    try {
+      const response = await fetch(`/api/generateImage?prompt=${encodeURIComponent(prompt)}`);
+      const data = await response.json();
+
+      if (response.ok && data.imageUrl) {
+        setImageUrl(data.imageUrl);
+      } else {
+        setError('Failed to generate image');
+      }
+    } catch (err) {
+      setError('An error occurred while generating the image');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+      <div className="max-w-lg w-full bg-white shadow-lg rounded-lg p-6 space-y-6">
+        <h1 className="text-4xl font-semibold text-center text-blue-600">AI Image Generator</h1>
+
+        {/* Input field and Button */}
+        <div className="flex flex-col items-center space-y-4">
+          <div className="relative w-full">
+            <input
+              type="text"
+              value={prompt}
+              onChange={(e) => setPrompt(e.target.value)}
+              placeholder="Enter a prompt..."
+              className="w-full p-3 pl-10 rounded-lg border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" size={20} />
+          </div>
+
+          <button
+            onClick={generateImage}
+            disabled={loading}
+            className="w-full py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-blue-400 transition duration-300"
           >
-            Read our docs
-          </a>
+            {loading ? (
+              <div className="flex items-center justify-center space-x-2">
+                <ClipLoader size={20} color="#fff" />
+                <span>Generating...</span>
+              </div>
+            ) : (
+              'Generate Image'
+            )}
+          </button>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+
+        {/* Loading message */}
+        {loading && (
+          <div className="text-center text-gray-500 mt-4">
+            <p>Please wait while the image is being generated...</p>
+          </div>
+        )}
+
+        {/* Error Message */}
+        {error && <p className="text-red-500 text-center mt-4">{error}</p>}
+
+        {/* Display Image */}
+        {imageUrl && (
+          <div className="mt-8 text-center">
+            <h2 className="text-2xl font-semibold text-gray-700">Generated Image:</h2>
+            <img src={imageUrl} alt="Generated AI" className="max-w-full max-h-96 mt-4 rounded-lg shadow-lg" />
+          </div>
+        )}
+      </div>
     </div>
   );
 }
