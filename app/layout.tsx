@@ -26,13 +26,21 @@ export const metadata: Metadata = {
     title: "AI Image Generator | Stability AI",
     description: "Create stunning images from text prompts with Stability AI's powerful diffusion model.",
     url: "https://yourwebsite.com",
-    image: "/path-to-your-og-image.jpg", // Add a path to your Open Graph image
+    images: [
+      {
+        url: "/c777875d-a605-438f-a308-061befa92da0.webp", // Corrected to 'images' and used the URL
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "AI Image Generator | Stability AI",
     description: "Generate images from text prompts with Stability AI's diffusion model.",
-    image: "/path-to-your-twitter-image.jpg", // Add a path to your Twitter image
+    images: [
+      {
+        url: "/c777875d-a605-438f-a308-061befa92da0.webp", // Corrected to 'images' and used the URL
+      },
+    ],
   },
 };
 
