@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { ClipLoader } from 'react-spinners';
 import { FaSearch, FaBolt, FaPaintBrush, FaDownload, FaCheckCircle } from 'react-icons/fa'; // Icons for Features and About
 import { motion } from 'framer-motion'; // Import Framer Motion
-import ReactLoading from 'react-loading'; // For loading spinner
 import { ToastContainer, toast } from 'react-toastify'; // For notifications
 import 'react-toastify/dist/ReactToastify.css'; // Required Toast styles
 
