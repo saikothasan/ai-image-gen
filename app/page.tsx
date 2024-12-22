@@ -30,6 +30,10 @@ export default function Home() {
         setError('Failed to generate image');
       }
     } catch (err) {
+      // Log the error to the console
+      console.error('Error generating image:', err);
+
+      // Set an error state for user-friendly message
       setError('An error occurred while generating the image');
     } finally {
       setLoading(false);
